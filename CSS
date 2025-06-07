@@ -1,0 +1,375 @@
+/* CSS for Shubham Arole's Luxury Portfolio */
+
+/* Define CSS Variables for consistent theming */
+:root {
+    --cream-bg: #FDFCEF;         /* Very light cream/beige for body background */
+    --container-bg: #FEFAF0;     /* Slightly off-white/cream for main container */
+    --border-soft: #E0DBCF;      /* Soft beige border */
+    --border-light: #EAE5D7;     /* Lighter beige border for content boxes */
+    --box-bg: #F9F7EB;           /* Very light beige/off-white for content boxes */
+    --main-text: #23211F;        /* Almost black, deep brown for general text */
+    --heading-text: #2C2825;     /* Slightly lighter deep brown for headings */
+    --para-text: #4A443E;        /* Medium brown-gray for paragraphs */
+    --accent: #A38C75;           /* Soft brown accent for titles/icons */
+    --accent2: #B5A18C;          /* Golden beige on hover */
+    --muted: #7A746E;            /* Muted brown-gray for less prominent text/links */
+    /* Increased border thickness for shadows */
+    --card-shadow: 0 12px 20px -5px rgba(0,0,0,0.1), 0 6px 10px -3px rgba(0,0,0,0.06); /* More prominent shadow for main container */
+    --box-shadow: 0 2px 5px 0 rgba(0,0,0,0.08); /* More prominent shadow for content boxes */
+}
+
+/* Base Styles */
+html, body {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--cream-bg);
+    min-height: 100vh;
+    color: var(--main-text);
+    line-height: 1.6; /* Improved readability */
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+    position: relative; /* Needed for positioning fixed children like the cover photo */
+}
+
+/* Portfolio Container */
+.portfolio-container {
+    background: var(--container-bg);
+    box-shadow: var(--card-shadow);
+    border-radius: 3rem; /* rounded-xl */
+    max-width: 90rem; /* max-w-4xl, adjusted from 64rem */
+    width: 95%; /* Make it slightly less than 100% on small screens for padding */
+    margin: 350px auto 4rem auto; /* Pushes the container down from the top, allowing the fixed cover photo to be visible above it */
+    padding: 0 1.25rem 2rem 1.25rem;
+    border: 4px solid var(--border-soft);
+    position: relative; /* Ensures this container sits above the fixed background */
+    z-index: 1; /* Ensure container is above body background, but below cover if cover is abs positioned */
+}
+
+/* Cover Photo */
+.cover-photo-bg {
+    width: 100vw;
+    /* Reduced height for the cover area */
+    height: 300px; /* Previously 350px */
+    min-height: 200px; /* Adjusted minimum height */
+    max-height: 400px; /* Adjusted maximum height */
+    overflow: hidden; /* Ensures image stays within bounds */
+    position: fixed; /* Fixed to viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0; /* Ensures it stays behind other content */
+}
+
+.cover-photo-bg img {
+    width: 100vw; /* Image spans full viewport width */
+    height: 100%; /* Image fills its container height */
+    object-fit: cover; /* Ensures image covers area, cropping if needed */
+    display: block;
+}
+
+/* Responsive adjustments for cover photo and portfolio container */
+@media (max-width: 900px) {
+    .cover-photo-bg {
+        /* Further reduced height for smaller screens */
+        height: 150px; /* Previously 180px */
+        min-height: 100px; /* Adjusted minimum height for mobile */
+    }
+    .portfolio-container {
+        /* Adjusted top margin for smaller screens to match new cover height */
+        margin-top: 100px; /* Previously 130px */
+        border-radius: 1.5rem; /* Smaller border-radius for mobile */
+    }
+}
+
+
+/* Header Section */
+header {
+    position: relative;
+    margin-bottom: 2.5rem; /* mb-10 */
+    padding-bottom: 2.5rem; /* pb-6 */
+    border-bottom: 1px solid var(--border-soft);
+}
+/* Profile Row - for image and text alignment */
+.profile-row {
+    display: flex;
+    align-items: flex-end; /* Aligns profile picture bottom with text bottom */
+    margin-top: -100px; /* Pull profile image up over the cover */
+    flex-direction: row; /* Default to row for desktop */
+    justify-content: flex-start; /* Align content to the left */
+}
+@media (max-width: 900px) { /* Responsive adjustments for smaller screens */
+    .profile-row {
+        flex-direction: column;
+        align-items: center;
+        margin-top: -50px; /* Adjusted margin for smaller screens */
+    }
+    .profile-picture {
+        margin-bottom: 1rem; /* Add margin back for stacked layout */
+    }
+}
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+
+/* Profile Picture */
+.profile-picture {
+    border: 7px solid var(--accent);
+    border-radius: 50%; /* Perfect circle */
+    box-shadow: 0 4px 16px -2px rgba(0,0,0,0.16), 0 2px 8px -2px rgba(0,0,0,0.03);
+    /* Reduced size for frame */
+    width: 180px; /* Previously 220px */
+    height: 180px; /* Previously 220px */
+    object-fit: cover;
+    object-position: center; /* Centers the image within the circle */
+    background: #fff;
+    z-index: 2; /* Ensures it overlaps cover photo */
+    margin-bottom: 0;
+    margin-right: 2.3rem; /* Space between picture and info */
+    margin-left: 0; /* Aligned to left */
+    flex-shrink: 0; /* Prevents shrinking on smaller screens */
+}
+@media (max-width: 900px) {
+    .profile-picture {
+        /* Reduced size for mobile */
+        width: 100px; /* Previously 120px */
+        height: 100px; /* Previously 120px */
+        min-width: 100px; /* Adjusted min-width */
+        min-height: 100px; /* Adjusted min-height */
+        margin-right: 0;
+        margin-left: 0; /* Centered on mobile */
+    }
+}
+
+/* Headings */
+h1 {
+    color: var(--heading-text);
+    font-weight: 900; /* font-extrabold */
+    margin-bottom: 0.2rem;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+@media (min-width: 640px) {
+    h1 { font-size: 2.75rem; } /* sm:text-5xl */
+}
+@media (min-width: 1024px) {
+    h1 { font-size: 3.75rem; } /* lg:text-6xl */
+}
+
+h2, h3 {
+    color: var(--heading-text);
+    font-weight: 800; /* font-bold */
+}
+h2 {
+    font-size: 2rem; /* text-3xl */
+    margin-bottom: 1.1rem; /* mb-4 */
+    display: flex; /* For icon alignment */
+    align-items: center;
+    gap: 0.6rem;
+    justify-content: center; /* Center the heading and its icon */
+    text-align: center;
+}
+h3 {
+    font-size: 1.25rem; /* text-xl */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+/* Paragraphs */
+p {
+    color: var(--para-text);
+    font-weight: 400;
+    font-size: 1.12rem; /* text-lg */
+    margin-top: 0; /* Ensures no extra space above paragraphs if using H-tags above */
+}
+
+/* Font Weights */
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+/* Contact Links & Icons */
+.subtitle {
+    color: var(--accent);
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+}
+
+.contact-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem 1.3rem; /* gap-y-2 gap-x-4 */
+    margin: 0.5rem 0 0 0;
+    font-size: 1.04rem;
+    justify-content: flex-start; /* Align items to the left */
+}
+.contact-link {
+    color: var(--muted);
+    transition: color 0.2s ease; /* Smooth transition on hover */
+    text-decoration: none;
+    font-weight: 500;
+    display: flex; /* Align icon and text */
+    align-items: center; /* Center items vertically */
+}
+.contact-link:hover {
+    color: var(--accent2);
+}
+.contact-info-text {
+    color: var(--muted);
+    font-size: 1rem; /* text-base */
+    margin-right: 0.5rem; /* Small space after icon */
+    display: flex; /* Align icon and text */
+    align-items: center; /* Center items vertically */
+}
+.contact-icon {
+    color: var(--accent);
+    margin-right: 0.35em; /* Small space after icon */
+    vertical-align: middle;
+    width: 1.1em; /* Adjust icon size */
+    height: 1.1em; /* Adjust icon size */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+.project-icon { /* Specific style for project icon if needed, though contact-icon style is similar */
+    color: var(--accent);
+    margin-right: 0.35em;
+    vertical-align: middle;
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+}
+
+/* Section Margins */
+section {
+    margin-bottom: 2.5rem; /* mb-10 */
+}
+
+.resume-section {
+    margin-bottom: 0.5rem; /* Reduced from 1rem to 0.5rem */
+}
+
+.resume-download-link {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem; /* Add space below the link */
+    display: inline-block; /* Allows margin-bottom to work */
+}
+
+.resume-embed-container {
+    margin-top: 1.2rem;
+}
+
+
+/* Content Boxes (for Projects, Industry, Education) */
+.content-box {
+    background: var(--box-bg);
+    padding: 1.2rem 1.1rem; /* p-5 */
+    border-radius: 0.7rem; /* rounded-lg */
+    border: 2px solid var(--border-light);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 1.2rem; /* space-y-8 handled by margin on sections themselves */
+}
+.content-box h3 {
+    font-weight: 700; /* font-bold */
+}
+.content-box p, .content-box ul {
+    color: var(--para-text);
+}
+.content-box ul li {
+    color: var(--para-text);
+}
+.content-box-link {
+    text-decoration: none; /* Remove underline from project links */
+    color: var(--heading-text); /* Ensure the link text uses the heading color */
+}
+.content-box-link h3:hover {
+    color: var(--accent2); /* Change color on hover for project titles */
+}
+
+
+/* Education Box specific styling */
+.education-box h3 { font-size: 1.15rem; } /* Slightly smaller for sub-education title */
+.education-box p { margin-bottom: 0.25rem; } /* Reduce spacing between lines */
+.education-box .text-sm {
+    color: var(--muted);
+    font-size: 0.93rem; /* Slightly smaller text for dates/details */
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem; /* gap-4 */
+}
+@media (min-width: 640px) { /* sm: */
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) { /* lg: */
+    .skills-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Industry Exposure Grid */
+.industry-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem; /* gap-6 */
+}
+@media (min-width: 768px) { /* md: */
+    .industry-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Image Gallery Grid within Industry Exposure */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Default to 2 columns */
+    gap: 0.8rem; /* gap-4 */
+    margin-top: 1rem;
+}
+@media (max-width: 639px) { /* Adjust for mobile, less than sm: breakpoint */
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+}
+
+.industry-image {
+    width: 100%;
+    height: 145px; /* Fixed height for consistency */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: var(--box-shadow);
+    object-fit: contain; /* Changed from 'cover' to 'contain' for perfect fit without cropping */
+    display: block; /* Ensure it takes full width of grid cell */
+    background: #e9e6de; /* Placeholder background color to show empty space if any */
+    border: 1px solid var(--border-light); /* Added a light border to images */
+}
+
+/* List styling */
+ul {
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+    padding-left: 1.25rem; /* Default padding for disc lists */
+}
+.list-disc {
+    list-style-type: disc;
+}
+.list-inside {
+    list-style-position: inside;
+}
+.space-y-1 > li + li { /* Apply vertical spacing between list items within .space-y-1 */
+    margin-top: 0.2em;
+}
+.space-y-4 > div + div { /* Apply vertical spacing between divs within .space-y-4 */
+    margin-top: 1.2em;
+}
+.ml-4 { margin-left: 1rem; } /* Specific margin for nested list items */
+
+/* Footer */
+footer {
+    color: var(--muted);
+    border-top: 2px solid var(--border-soft);
+    text-align: center;
+    font-size: 0.95rem; /* text-sm */
+    margin-top: 3.2rem; /* mt-10 */
+    padding-top: 2rem; /* pt-6 */
+}
