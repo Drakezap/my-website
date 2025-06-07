@@ -61,10 +61,11 @@ html, body {
 }
 
 .cover-photo-bg img {
-    width: 100vw; /* Image spans full viewport width */
-    height: 100%; /* Image fills its container height */
-    object-fit: cover; /* Ensures image covers area, cropping if needed */
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    aspect-ratio: 4/1;
 }
 
 /* Responsive adjustments for cover photo and portfolio container */
@@ -92,10 +93,11 @@ header {
 /* Profile Row - for image and text alignment */
 .profile-row {
     display: flex;
-    align-items: flex-end; /* Aligns profile picture bottom with text bottom */
-    margin-top: -100px; /* Pull profile image up over the cover */
-    flex-direction: row; /* Default to row for desktop */
-    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-end;
+    margin-top: 0; /* Remove negative margin */
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
 }
 @media (max-width: 900px) { /* Responsive adjustments for smaller screens */
     .profile-row {
@@ -107,41 +109,43 @@ header {
         margin-bottom: 1rem; /* Add margin back for stacked layout */
     }
 }
+.profile-picture {
+    position: absolute;
+    left: 50%;
+    top: -120px; /* Place above the container, adjust as needed */
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 300px; /* Increased size */
+    height: 300px;
+    min-width: 300px;
+    min-height: 300px;
+    border: 7px solid var(--accent);
+    border-radius: 50%; /* Perfect circle */
+    box-shadow: 0 4px 16px -2px rgba(0,0,0,0.16), 0 2px 8px -2px rgba(0,0,0,0.03);
+    object-fit: cover;
+    object-position: center; /* Centers the image within the circle */
+    background: #fff;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    flex-shrink: 0;
+}
+@media (max-width: 900px) {
+    .profile-picture {
+        width: 180px;
+        height: 180px;
+        min-width: 180px;
+        min-height: 180px;
+        top: -70px;
+    }
+}
 .profile-info {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    margin-top: 200px; /* Push content below the profile picture */
 }
 
-
-/* Profile Picture */
-.profile-picture {
-    border: 7px solid var(--accent);
-    border-radius: 50%; /* Perfect circle */
-    box-shadow: 0 4px 16px -2px rgba(0,0,0,0.16), 0 2px 8px -2px rgba(0,0,0,0.03);
-    /* Reduced size for frame */
-    width: 180px; /* Previously 220px */
-    height: 180px; /* Previously 220px */
-    object-fit: cover;
-    object-position: center; /* Centers the image within the circle */
-    background: #fff;
-    z-index: 2; /* Ensures it overlaps cover photo */
-    margin-bottom: 0;
-    margin-right: 2.3rem; /* Space between picture and info */
-    margin-left: 0; /* Aligned to left */
-    flex-shrink: 0; /* Prevents shrinking on smaller screens */
-}
-@media (max-width: 900px) {
-    .profile-picture {
-        /* Reduced size for mobile */
-        width: 100px; /* Previously 120px */
-        height: 100px; /* Previously 120px */
-        min-width: 100px; /* Adjusted min-width */
-        min-height: 100px; /* Adjusted min-height */
-        margin-right: 0;
-        margin-left: 0; /* Centered on mobile */
-    }
-}
 
 /* Headings */
 h1 {
@@ -224,21 +228,27 @@ p {
     display: flex; /* Align icon and text */
     align-items: center; /* Center items vertically */
 }
-.contact-icon {
+.contact-icon, .project-icon {
     color: var(--accent);
     margin-right: 0.35em; /* Small space after icon */
     vertical-align: middle;
-    width: 1.1em; /* Adjust icon size */
-    height: 1.1em; /* Adjust icon size */
-    flex-shrink: 0; /* Prevent icon from shrinking */
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
 }
 .project-icon { /* Specific style for project icon if needed, though contact-icon style is similar */
     color: var(--accent);
     margin-right: 0.35em;
     vertical-align: middle;
-    width: 1.1em;
-    height: 1.1em;
-    flex-shrink: 0;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
 }
 
 /* Section Margins */
